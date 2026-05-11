@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Brand App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <i class="fas fa-cubes-stacked"></i>
+                <span>My Coca Cola Brand</span>
+            </a>
+            <ul class="nav-menu" id="top-nav">
+                <li><a href="#" id="nav-home" class="active"><i class="fas fa-cube"></i> Home</a></li>
+                <li><a href="#" id="nav-about"><i class="fas fa-circle-info"></i> About</a></li>
+                <li><a href="#" id="nav-reference"><i class="fas fa-book"></i> Reference</a></li>
+                <li><a href="#" id="nav-sitemap"><i class="fas fa-sitemap"></i> Sitemap</a></li>
+                <li><a href="#" id="nav-originality"><i class="fas fa-certificate"></i> Originality</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="app-layout" id="app-container">
+        <aside class="sidebar" id="ui-panel">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-box-open"></i> Select Model</h3>
+                <div class="custom-select-wrapper">
+                    <select id="model-select" class="glass-select">
+                        <option value="coca_cola_bottle">Coca Cola (Bottle)</option>
+                        <option value="just_a_sip_of_the_hmm_-_bottle">Just A Sip (Bottle)</option>
+                        <option value="soda_cans">Soda Cans</option>
+                        <option value="diet_soda">Diet Soda</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-video"></i> Camera View</h3>
+                <div class="camera-grid">
+                    <button class="cam-view-btn" data-view="front" title="Front View">
+                        <i class="fas fa-arrow-down"></i> Front
+                    </button>
+                    <button class="cam-view-btn" data-view="back" title="Back View">
+                        <i class="fas fa-arrow-up"></i> Back
+                    </button>
+                    <button class="cam-view-btn" data-view="top" title="Top View">
+                        <i class="fas fa-arrow-right"></i> Top
+                    </button>
+                    <button class="cam-view-btn" data-view="bottom" title="Bottom View">
+                        <i class="fas fa-arrow-left"></i> Bottom
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-sliders-h"></i> Display Controls</h3>
+                <div class="control-grid">
+                    <button class="control-btn" id="btn-wireframe" title="Toggle Wireframe">
+                        <i class="fas fa-border-all"></i>
+                        <span>Wireframe</span>
+                    </button>
+                    <button class="control-btn active" id="btn-light" title="Toggle Lights">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Lighting</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section music-player-section">
+                <h3><i class="fas fa-music"></i> Music Player</h3>
+                <div class="music-player">
+                    <div class="equalizer">
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+                    <div class="track-info">
+                        <div class="track-title" id="track-title">Music Track</div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                        <div class="time-display">
+                            <span class="current-time" id="current-time">0:00</span>
+                            <span class="duration" id="duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button class="player-btn" id="btn-prev-track" title="Previous">
+                            <i class="fas fa-backward"></i>
+                        </button>
+                        <button class="player-btn play-btn" id="btn-play" title="Play">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="player-btn" id="btn-next-track" title="Next">
+                            <i class="fas fa-forward"></i>
+                        </button>
+                    </div>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up" id="volume-icon"></i>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="70">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-viewer">
+            <button class="nav-arrow prev-btn" id="btn-prev" title="Previous Model">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="canvas-wrapper" id="canvas-container">
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring loader-ring-2"></div>
+                    <div class="loader-ring loader-ring-3"></div>
+                </div>
+            </div>
+            <button class="nav-arrow next-btn" id="btn-next" title="Next Model">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </main>
+    </div>
+
+    <div id="page-content" style="display: none;">
+        <section id="content-about" class="page-section">
+            <h2><i class="fas fa-circle-info"></i> About This 3D Web Application</h2>
+            <hr>
+
+            <div class="card-grid two-col">
+                <div class="info-card">
+                    <h3><i class="fas fa-bullseye"></i> Project Overview</h3>
+                    <p>This single-page 3D web application was developed as the final assignment for the Web 3D module. It serves as an interactive product showcase for the Coca-Cola brand, allowing users to view and manipulate high-quality 3D models of Coca-Cola and Fanta products in real-time directly within their web browser.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-star"></i> Core Features</h3>
+                    <ul>
+                        <li><strong>Interactive 3D Gallery</strong> — Switch between product models seamlessly</li>
+                        <li><strong>Real-time Controls</strong> — Wireframe toggle, lighting toggle</li>
+                        <li><strong>Responsive Design</strong> — Adapts to desktop and mobile</li>
+                        <li><strong>Content Swapping</strong> — Native JS navigation without page refresh</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-bottom: 2rem;">
+                <h3><i class="fas fa-layer-group"></i> Technology Stack</h3>
+                <div class="card-grid" style="margin-bottom: 0;">
+                    <div>
+                        <p><strong><i class="fas fa-code"></i> Frontend</strong></p>
+                        <p style="margin-bottom: 0.8rem;">HTML5, CSS3, native JavaScript (ES6 Modules)</p>
+                    </div>
+                    <div>
+                        <p><strong><i class="fas fa-cube"></i> 3D Rendering</strong></p>
+                        <p style="margin-bottom: 0.8rem;">Three.js (WebGL) for scene creation and rendering</p>
+                    </div>
+                    <div>
+                        <p><strong><i class="fas fa-paint-brush"></i> 3D Modeling</strong></p>
+                        <p style="margin-bottom: 0.8rem;">Blender — modeling, texturing, <code>.glb</code> export</p>
+                    </div>
+                    <div>
+                        <p><strong><i class="fab fa-git-alt"></i> Code Repository</strong></p>
+                        <p style="margin-bottom: 0.8rem;">Git version control, <a href="#" target="_blank">GitHub Repository</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-reference" class="page-section" style="display: none;">
+            <h2><i class="fas fa-book"></i> References & Resources</h2>
+            <hr>
+
+            <div class="card-grid two-col">
+                <div class="info-card">
+                    <h3><i class="fas fa-globe"></i> Core Web Technologies</h3>
+                    <ul>
+                        <li><strong>MDN Web Docs</strong> — JavaScript (ES6), HTML5, CSS3 reference<br>
+                            <a href="https://developer.mozilla.org/en-US/" target="_blank">developer.mozilla.org</a></li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-cubes"></i> 3D Rendering Engine</h3>
+                    <ul>
+                        <li><strong>Three.js</strong> — Core WebGL library<br>
+                            <a href="https://threejs.org/docs/" target="_blank">threejs.org/docs</a></li>
+                        <li><strong>GLTFLoader</strong> — <code>.glb</code> model loading<br>
+                            <a href="https://threejs.org/docs/#examples/en/loaders/GLTFLoader" target="_blank">threejs.org/docs</a></li>
+                        <li><strong>OrbitControls</strong> — Mouse/touch interaction<br>
+                            <a href="https://threejs.org/docs/#examples/en/controls/OrbitControls" target="_blank">threejs.org/docs</a></li>
+                        <li><strong>RoomEnvironment</strong> — PMREM environment map<br>
+                            <a href="https://threejs.org/docs/#examples/en/environments/RoomEnvironment" target="_blank">threejs.org/docs</a></li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-cube"></i> 3D Modeling Software</h3>
+                    <ul>
+                        <li><strong>Blender 3D</strong> — Open-source 3D creation suite<br>
+                            <a href="https://www.blender.org/" target="_blank">blender.org</a></li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-image"></i> Brand Assets & Textures</h3>
+                    <p><em>The textures and brand logos used on the 3D models are the intellectual property of The Coca-Cola Company and were utilized strictly for educational purposes within this academic assignment.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-sitemap" class="page-section" style="display: none;">
+            <h2><i class="fas fa-sitemap"></i> Sitemap</h2>
+            <hr>
+            <div class="sitemap-tree">
+                <div class="sitemap-item">
+                    <i class="fas fa-home"></i>
+                    <div class="sitemap-info"><strong>Home</strong><span>Interactive 3D model viewer with controls</span></div>
+                </div>
+                <div class="sitemap-item">
+                    <i class="fas fa-circle-info"></i>
+                    <div class="sitemap-info"><strong>About</strong><span>Project overview, features, and technology stack</span></div>
+                </div>
+                <div class="sitemap-item">
+                    <i class="fas fa-book"></i>
+                    <div class="sitemap-info"><strong>Reference</strong><span>Sources, libraries, and documentation</span></div>
+                </div>
+                <div class="sitemap-item">
+                    <i class="fas fa-sitemap"></i>
+                    <div class="sitemap-info"><strong>Sitemap</strong><span>Site structure and navigation guide</span></div>
+                </div>
+                <div class="sitemap-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="sitemap-info"><strong>Originality</strong><span>Originality statement and declaration</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-originality" class="page-section" style="display: none;">
+            <h2><i class="fas fa-certificate"></i> Originality Statement</h2>
+            <hr>
+            <div class="statement-card">
+                <h3><i class="fas fa-check-circle"></i> Declaration</h3>
+                <p>This project was developed as an academic assignment for the Web 3D module. All work presented is original unless explicitly stated otherwise.</p>
+            </div>
+            <div class="card-grid two-col">
+                <div class="info-card">
+                    <h3><i class="fas fa-cube"></i> 3D Models</h3>
+                    <ul>
+                        <li>Created and textured using Blender</li>
+                        <li>Exported in <code>.glb</code> format for web use</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-code"></i> Code & Libraries</h3>
+                    <ul>
+                        <li>Original JavaScript implementation</li>
+                        <li>Three.js used under MIT license</li>
+                        <li>Font Awesome icons (free license)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-palette"></i> Brand Assets</h3>
+                    <ul>
+                        <li>Used for educational purposes only</li>
+                        <li>Coca-Cola trademarks respected</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-shield-halved"></i> Compliance</h3>
+                    <ul>
+                        <li>Academic integrity standards followed</li>
+                        <li>All sources properly attributed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
